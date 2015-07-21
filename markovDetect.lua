@@ -50,6 +50,10 @@ function probability(name)
 	return logProb
 end
 
+--[[Olivia notes that in python this would be:
+def probfake(n): if n.isalpha(): return math.log(1/26)*len(n)+math.log(1/14); else: return 0 - sys.maxint
+
+I note that if I remembered how to regex this could be reduced about as much in just lua.]]
 function probFake(n)
 	for i = 1, #n do
 		if (string.byte(n:sub(i,i)) < a) or (string.byte(n:sub(i,i)) > z) then
