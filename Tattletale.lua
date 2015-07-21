@@ -3,6 +3,11 @@ package.path = package.path..";./?.lua;./?/init.lua;"
 require 'config'
 require "irc"
 require 'markovDetect'
+
+if not logToConsole then
+	print = function() end
+end
+
 local sleep = require "socket".sleep
 
 local s = irc.new{nick = nick}

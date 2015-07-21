@@ -1,5 +1,6 @@
 nick = "Tattletale"
 password = "password"
+logToConsole = false
 threshold = 0.5
 prior = 1/20
 refeshRate = 0.5
