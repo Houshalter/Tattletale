@@ -17,7 +17,7 @@ function markovDetect(user, channel)
 	if p > 0.5 then 
 		s:sendChat(channel, string.format("%s is a bot! %g probabilty.", nick, p))
 	else
-		s:setMode({target = "#channel", nick = user.nick, add = "+v"})
+		s:setMode({target = channel, nick = user.nick, add = "+v"})
 	end
 	print(string.format("Joined: %s. Bayes: %g, Probability Real: %g, Probability Fake: %g", nick, p, probability(nick), probFake(nick)))
 	print(("username: %s, host: %s, realname: %s"):format(tostring(user.username), tostring(user.host), tostring(user.realname)))
