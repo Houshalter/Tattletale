@@ -1,4 +1,4 @@
-package.path = "./?.lua;./?/init.lua;"
+package.path = package.path..";./?.lua;./?/init.lua;"
 
 require 'config'
 require "irc"
