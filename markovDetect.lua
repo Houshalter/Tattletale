@@ -67,5 +67,7 @@ function bayes(n,p)
 	local r = math.exp(probability(n))
 	local f = math.exp(probFake(n))
 	--return math.exp(f+math.log(p)-math.log(math.exp(r)))
+	
+	--bayes theorem
 	return f*p/(f*p+r*(1-p))
 end
