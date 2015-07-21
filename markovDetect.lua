@@ -1,6 +1,7 @@
 local validChars = {string.char(0),string.char(1),string.char(2)}
 --for i = 65, 122 do table.insert(validChars, string.char(i)) end
-for i = 97, 122 do table.insert(validChars, string.char(i)) end
+local a,z = string.byte('a'),string.byte('z')
+for i = a, z do table.insert(validChars, string.char(i)) end
 local tableProbs = {}
 
 
@@ -19,7 +20,7 @@ function process(n)
 	local result = ''
 	for i = 1, #n do
 		local c = n:sub(i,i)
-		if (c:byte() < 97) or (c:byte() > 122) then
+		if (c:byte() < a) or (c:byte() > z) then
 			c = string.char(2)
 		end
 		result = result..c
@@ -51,7 +52,7 @@ end
 
 function probFake(n)
 	for i = 1, #n do
-		if (string.byte(n:sub(i,i)) < 97) or (string.byte(n:sub(i,i)) > 122) then
+		if (string.byte(n:sub(i,i)) < a) or (string.byte(n:sub(i,i)) > z) then
 			return -math.huge
 		end
 	end
