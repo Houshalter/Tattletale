@@ -63,5 +63,3 @@ function bayes(n,p)
 	--return math.exp(f+math.log(p)-math.log(math.exp(r)))
 	return f*p/(f*p+r*(1-p))
 end
-
-print(bayes("epduuhwruupzik",1/20))

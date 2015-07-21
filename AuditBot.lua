@@ -1,5 +1,6 @@
+package.path = "./?.lua;./?/init.lua;"
+
 require "irc"
-require 'fixRequire'
 require 'markovDetect'
 local sleep = require "socket".sleep
 
@@ -16,14 +17,14 @@ function markovDetect(user, channel)
 		s:sendChat(channel, string.format("%s is a bot! %g probabilty.", nick, p))
 	end
 	print(string.format("Joined: %s. Bayes: %g, Probability Real: %g, Probability Fake: %g", nick, p, probability(nick), probFake(nick)))
-	print(("username: %s, host: %s, realname: %s"):format(user.username, user.host, user.realname))
+	print(("username: %s, host: %s, realname: %s"):format(tostring(user.username), tostring(user.host), tostring(user.realname)))
 end
 
 s:hook("OnJoin", markovDetect)
 
 
 s:connect("chat.freenode.net")
---s:join("#lesswrong")
+s:join("#lesswrong")
 s:join("#lw-bots")
 
 while true do
