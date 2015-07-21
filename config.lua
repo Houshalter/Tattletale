@@ -4,7 +4,7 @@ threshold = 0.5
 prior = 1/20
 refeshRate = 0.5
 server = "chat.freenode.net"
-channels = {"#lesswrong", "#lw-bots"}
+channels = {"#lesswrong", "#lw-bots", "##lw-meta"}
 --set to nil or remove to put messages to the current channel
 metaChannel = "##lw-meta"
 
