@@ -31,7 +31,7 @@ s:connect(server)
 for i, channel in ipairs(channels) do
 	s:join(channel)
 end
-irc:sendChat('NickServ', 'identify '..password)
+s:sendChat('NickServ', 'identify '..password)
 while true do
 	s:think()
 	sleep(refeshRate)
