@@ -2,19 +2,8 @@ local validChars = {string.char(0),string.char(1),string.char(2)}
 --for i = 65, 122 do table.insert(validChars, string.char(i)) end
 local a,z = string.byte('a'),string.byte('z')
 for i = a, z do table.insert(validChars, string.char(i)) end
-local tableProbs = {}
 
 
-for i,v in ipairs(names) do
-	names[i] = v:lower()
-end
-
-for i,char in ipairs(validChars) do
-	tableProbs[char] = {}
-	for _,char2 in ipairs(validChars) do
-		tableProbs[char][char2] = 1
-	end	
-end
 
 function process(n)
 	local result = ''
@@ -26,6 +15,33 @@ function process(n)
 		result = result..c
 	end
 	return string.char(0)..result..string.char(1)
+end
+
+
+for i,v in ipairs(names) do
+	names[i] = v:lower()
+end
+
+totalCharCount = 0
+charCount = {}
+for i, n in ipairs(names) do
+	n = process(n)
+	for i = 2, #n do
+		totalCharCount = totalCharCount+1
+		charCount[n:sub(i,i)] = (charCount[n:sub(i,i)] or 0)+1
+	end
+end
+
+
+local tableProbs = {}
+
+
+for i,char in ipairs(validChars) do
+	tableProbs[char] = {}
+	for z = 2,#validChars do
+		local char2 = validChars[z]
+		tableProbs[char][char2] = (charCount[char2]+1)/(totalCharCount+26)*27
+	end	
 end
 
 for i,n in ipairs(names) do

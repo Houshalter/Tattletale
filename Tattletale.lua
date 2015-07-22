@@ -10,7 +10,7 @@ end
 
 local sleep = require "socket".sleep
 
-local s = irc.new{nick = nick}
+local s = irc.new{nick = nick, username = username, realname = realname}
 local prob = 0
 
 s:hook("OnChat", function(user, channel, message)
@@ -25,7 +25,7 @@ function markovDetect(user, channel)
 	local p = bayes(nick,prior)
 	prob = p
 	if p > threshold then 
-		s:sendChat(metaChannel or channel, string.format("%s is a bot! %g probabilty.", nick, p))
+		s:sendChat((metaChannel or channel), string.format("%s is a bot! %g probabilty.", nick, p))
 	else
 		--s:setMode({target = channel, nick = user.nick, add = "+v"})
 		s:send(("mode %s +v %s"):format(channel, nick))
