@@ -11,7 +11,8 @@ channels = {"#lesswrong", "#lw-bots", "##lw-meta"}
 --set to nil or remove to put messages to the current channel
 metaChannel = "##lw-meta"
 
---[[ --These parameters are only for testing
+--[[
+--These parameters are only for testing
 nick = "TattletaleTest"
 channels = {"#lw-bots"}
 logToConsole = true

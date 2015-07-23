@@ -3,6 +3,14 @@ local validChars = {string.char(0),string.char(1),string.char(2)}
 local a,z = string.byte('a'),string.byte('z')
 for i = a, z do table.insert(validChars, string.char(i)) end
 
+local lowerCaseNames = 0
+for i, n in ipairs(names) do
+	if n == n:lower() then
+		lowerCaseNames = lowerCaseNames+1
+	end
+end
+
+percentNamesLower = lowerCaseNames/#names
 
 
 function process(n)
@@ -80,6 +88,8 @@ function probFake(n)
 end
 
 function bayes(n,p)
+	--adjust prior for namees containing lowercase letters
+	p = p/((1-p)*percentNamesLower+p)
 	local r = math.exp(probability(n))
 	local f = math.exp(probFake(n))
 	--return math.exp(f+math.log(p)-math.log(math.exp(r)))
@@ -87,3 +97,10 @@ function bayes(n,p)
 	--bayes theorem
 	return f*p/(f*p+r*(1-p))
 end
+
+--[[for i,n in ipairs(names) do
+	print(n, bayes(n,1/20))
+end
+local p = 1/20
+print(percentNamesLower, p, p/((1-p)*percentNamesLower+p))
+print(bayes("zgty", p))]]
