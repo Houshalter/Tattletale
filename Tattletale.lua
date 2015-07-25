@@ -1,5 +1,6 @@
 package.path = package.path..";./?.lua;./?/init.lua;"
 
+require 'names'
 require 'config'
 require "irc"
 require 'markovDetect'
