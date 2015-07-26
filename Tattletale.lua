@@ -12,19 +12,22 @@ end
 local sleep = require "socket".sleep
 
 local s = irc.new{nick = nick, username = username, realname = realname}
-local prob = 0
+local lastUser = ''
 
 s:hook("OnChat", function(user, channel, message)
 	print(("[%s] %s: %s"):format(channel, user.nick, message))
-	if message:sub(1,5) == ".prob" then
-		s:sendChat(channel, string.format("%g", prob))
+	if message == ".prob" then
+		s:sendChat(channel, string.format("Last user was %s: %g probability of being a bot. %g probability of a real user choosing this name and %g probability of a randomly generated one.", lastUser, bayes(lastUser, prior), math.exp(probability(lastUser)), math.exp(probFake(lastUser))))
+	elseif message:match("%.prob%s(.*)") then
+		local nick = message:match("%.prob%s(.*)")
+		s:sendChat(channel, string.format("%s has %g probability of being a bot. %g probability of a real user choosing this name and %g probability of a randomly generated one.", nick, bayes(nick, prior), math.exp(probability(nick)), math.exp(probFake(nick))))
 	end
 end)
 
 function markovDetect(user, channel)
 	local nick = user.nick
+	lastUser = nick
 	local p = bayes(nick,prior)
-	prob = p
 	if p > threshold then 
 		s:sendChat((metaChannel or channel), string.format("%s is a bot! %g probabilty.", nick, p))
 	else
