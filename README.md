@@ -5,4 +5,4 @@ To run, navigate to the directory you saved it in and type
 
 	lua Tattletale.lua
 	
-You should have lua installed.
+You should have lua 5.1 installed.
