@@ -79,7 +79,9 @@ I note that if I remembered how to regex this could be reduced about as much in 
 
 EDIT: much better : )  ]]
 function probFake(n)
+	--no non-lower-case letters
 	if n:match('[^%l]') then return -math.huge end
+	--this calculates the entropy of the the name. 26 letters and 14 possible lengths
 	return math.log(1/26)*n:len()+math.log(1/14)
 end
 
