@@ -9,6 +9,11 @@ if not logToConsole then
 	print = function() end
 end
 
+local namesHash = {}
+for i, n in ipairs(names) do 
+	namesHash[n] = true
+end
+
 local sleep = require "socket".sleep
 
 local s = irc.new{nick = nick, username = username, realname = realname}
@@ -28,7 +33,7 @@ function markovDetect(user, channel)
 	local nick = user.nick
 	lastUser = nick
 	local p = bayes(nick,prior)
-	if p > threshold then 
+	if ((p > threshold) and (not namesHash[nick])) then 
 		s:sendChat((metaChannel or channel), string.format("%s is a bot! %g probabilty.", nick, p))
 	else
 		--s:setMode({target = channel, nick = user.nick, add = "+v"})
